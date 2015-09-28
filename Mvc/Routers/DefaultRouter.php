@@ -1,7 +1,8 @@
 <?php
 
-namespace GF\Routers;
-class DefaultRouter implements \GF\Routers\IRouter{
+namespace My\Mvc\Routers;
+
+class DefaultRouter implements IRouter{
     private $_controller = null;
     private $_method = null;
     private $_params = array();

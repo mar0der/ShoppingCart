@@ -1,16 +1,17 @@
 <?php
 
-namespace GF;
+namespace My\Mvc;
 include_once 'Loader.php';
+
 class App{
     private static $_instance;
     private $_config = null;
     private $_frontController;
 
     private function __construct() {
-        \GF\Loader::registerNamespace('GF', dirname(__FILE__).DIRECTORY_SEPARATOR);
-        \GF\Loader::registerAutoLoad();
-        $this->_config = \GF\Config::getInstance();
+        \My\Mvc\Loader::registerNamespace('My\Mvc', dirname(__FILE__).DIRECTORY_SEPARATOR);
+        \My\Mvc\Loader::registerAutoLoad();
+        $this->_config = \My\Mvc\Config::getInstance();
     }
 
     public function run(){
@@ -18,17 +19,17 @@ class App{
             $this->_config->setConfigFolder("../config");
         }
 
-        $this->_frontController = \GF\FrontController::getInstance();
+        $this->_frontController = \My\Mvc\FrontController::getInstance();
 
         $this->_frontController->dispatch();
     }
 
     /**
-     * @return \GF\App
+     * @return \My\Mvc\App
      */
     public static function getInstance(){
         if(self::$_instance == null) {
-            self::$_instance = new \GF\App();
+            self::$_instance = new \My\Mvc\App();
         }
 
         return self::$_instance;

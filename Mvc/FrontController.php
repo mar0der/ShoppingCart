@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Hadzhiew
- * Date: 18.9.2015 ã.
- * Time: 13:05
- */
 
-namespace GF;
+namespace My\Mvc;
 class FrontController {
     private static $_instance = null;
 
@@ -15,12 +9,12 @@ class FrontController {
     }
 
     public function dispatch() {
-        $router = new \GF\Routers\DefaultRouter();
-        $router->getURI();
+        $router = new \My\Mvc\Routers\DefaultRouter();
+        echo $router->getURI();
     }
 
     public function getDefaultController() {
-        $app = \GF\App::getInstance();
+        $app = \My\Mvc\App::getInstance();
         $controller = isset($app->getConfig()->app['default_controller']) ? $app->getConfig()->app['default_controller'] : null;
         if($controller) {
             return $controller;
@@ -29,7 +23,7 @@ class FrontController {
         return 'Index';
     }
     public function getDefaultMethod() {
-        $app = \GF\App::getInstance();
+        $app = \My\Mvc\App::getInstance();
         $method = isset($app->getConfig()->app['default_method']) ? $app->getConfig()->app['default_method'] : null;
         if($method) {
             return $method;
@@ -39,11 +33,11 @@ class FrontController {
     }
 
     /**
-     * @return \GF\FrontController
+     * @return \My\Mvc\FrontController
      */
     public static function getInstance() {
         if(self::$_instance == null) {
-            self::$_instance = new  \GF\FrontController();
+            self::$_instance = new  \My\Mvc\FrontController();
         }
 
         return self::$_instance;

@@ -1,6 +1,7 @@
 <?php
 
-namespace GF;
+namespace My\Mvc;
+
 final class Loader {
 
     private static $namespaces = array();
@@ -10,7 +11,7 @@ final class Loader {
     }
 
     public static  function registerAutoLoad() {
-        spl_autoload_register(array('\GF\Loader', 'autoload'));
+        spl_autoload_register(array('\My\Mvc\Loader', 'autoload'));
     }
 
     public static function autoload($class) {

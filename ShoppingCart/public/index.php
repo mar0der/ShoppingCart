@@ -1,5 +1,5 @@
 <?php
 
-include '../../gf/App.php';
-$app = \GF\App::getInstance();
+include '../../Mvc/App.php';
+$app = \My\Mvc\App::getInstance();
 $app->run();

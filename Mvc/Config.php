@@ -37,10 +37,10 @@ class Config
             //clear old config data
             $this->_configArray = array();
             $this->_configFolder = $_configFolder . DIRECTORY_SEPARATOR;
-//            $namespaces = $this->app['namespaces'];
-//            if(is_array($namespaces)) {
-//                \GF\Loader::registerNamespaces($namespaces);
-//            }
+            $namespaces = $this->app['namespaces'];
+            if(is_array($namespaces)) {
+                \My\Mvc\Loader::registerNamespaces($namespaces);
+            }
         } else {
             throw new \Exception('Config directory read error: ' . $configFolder);
         }

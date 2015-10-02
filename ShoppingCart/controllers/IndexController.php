@@ -6,14 +6,15 @@
  * Time: 9:20 PM
  */
 
-namespace Controllers;
+namespace My\ShoppingCart\Controllers {
 
 
-class IndexController
-{
-    public function index()
+    class IndexController
     {
-        echo "index index";
-    }
+        public function index()
+        {
+            echo "index tuka sam";
+        }
 
+    }
 }

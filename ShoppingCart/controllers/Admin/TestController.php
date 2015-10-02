@@ -6,13 +6,14 @@
  * Time: 9:32 PM
  */
 
-namespace Controllers\Admin;
+namespace My\ShoppingCart\Controllerss\Admin {
 
 
-class TestController
-{
-    public function index()
+    class TestController
     {
-        echo "admin / indes kam test";
+        public function index()
+        {
+            echo "admin / indes kam test";
+        }
     }
 }

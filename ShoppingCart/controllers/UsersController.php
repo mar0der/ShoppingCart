@@ -6,7 +6,7 @@
  * Time: 7:21 PM
  */
 
-namespace Controllers {
+namespace My\ShoppingCart\Controllers{
 
 
     class UsersController

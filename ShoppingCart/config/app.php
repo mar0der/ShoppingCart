@@ -2,7 +2,7 @@
 $config['default_controller']='index';
 $config['default_method']='index';
 $config['controllersSuffix']='Controller';
-$config['namespaces']['Controllers']='C:\xampp\htdocs\exs\mf\ShoppingCart\Controllers\\';
+$config['namespaces']['My\ShoppingCart']='C:\xampp\htdocs\exs\mf\ShoppingCart';
 
 $config['session']['autostart'] = true;
 $config['session']['type'] = 'database';

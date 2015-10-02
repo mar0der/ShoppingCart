@@ -1,13 +1,28 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: peter
+ * Date: 10/2/2015
+ * Time: 1:45 PM
+ */
 
-namespace My\Mvc\Routers;
+namespace My\Mvc\Routers {
 
-class DefaultRouter implements IRouter{
-    private $_controller = null;
-    private $_method = null;
-    private $_params = array();
 
-    public function getURI() {
-        return substr($_SERVER['PHP_SELF'], strlen($_SERVER['SCRIPT_NAME']) + 1);
+    class DefaultRouter implements \My\Mvc\Interfaces\IRouter
+    {
+
+        public function getURI()
+        {
+            if(isset($_GET['uri'])){
+                return $_GET['uri'];
+            }
+            return '';
+        }
+
+        public function getPost()
+        {
+            // TODO: Implement getPost() method.
+        }
     }
 }

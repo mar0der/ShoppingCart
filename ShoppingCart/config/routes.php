@@ -1,10 +1,7 @@
 <?php
-
-$config['admin']['namespace'] = 'Controllers\Admin1';
-
-$config['administration']['namespace'] = 'Controllers\Admin2';
-$config['administration']['controllers']['index'] = 'test';
-$config['administration']['controllers']['new'] = 'create';
-$config['*']['namespace'] = 'Controllers';
+$config['admin']['namespace']='Controllers\Admin';
+$config['admin']['controllers']['index']['to']='test';
+$config['admin']['controllers']['index']['methods']['new']['to']='_new';
+$config['*']['namespace']='Controllers';
 
 return $config;

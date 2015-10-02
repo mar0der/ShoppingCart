@@ -1,6 +1,16 @@
 <?php
-$config['gosho'] = 'pesho';
-$config['default_controller'] = 'defaultIndex';
-$config['default_method'] = 'defaultMethod';
-$config['namespaces']['Controllers'] = 'C:\xampp\htdocs\pp\ShoppingCart\ShoppingCart\controllers';
+$config['default_controller']='index';
+$config['default_method']='index';
+$config['controllersSuffix']='Controller';
+$config['namespaces']['Controllers']='C:\xampp\htdocs\exs\mf\ShoppingCart\Controllers\\';
+
+$config['session']['autostart'] = true;
+$config['session']['type'] = 'database';
+$config['session']['name'] = '__sess';
+$config['session']['lifetime'] = 3600;
+$config['session']['path'] = '/';
+$config['session']['domain'] = '';
+$config['session']['secure'] = false;
+$config['session']['dbConnection'] = 'default';
+$config['session']['dbTable'] = 'sessions';
 return $config;

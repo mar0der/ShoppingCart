@@ -1,9 +1,9 @@
 <?php
 
-namespace My\Mvc\Mvc;
+namespace My\Mvc\Core;
 
 use My\Mvc\Interfaces\IRouter;
-use DH\ShoppingCart\Models\BindingModels\User\LoginUser;
+use My\ShoppingCart\Models\BindingModels\User\LoginUser;
 
 class FrontController
 {
@@ -75,7 +75,7 @@ class FrontController
             return strtolower($controller);
         }
 
-        return 'index';
+        return 'Index';
     }
 
     public function getDefaultMethod()
@@ -85,7 +85,7 @@ class FrontController
             return strtolower($method);
         }
 
-        return 'index';
+        return 'Index';
     }
 
     /**
@@ -108,19 +108,23 @@ class FrontController
 
         $isCallable = false;
         try {
+//            v($namespaceClass);
+//            v($this->method);
             $isCallable = is_callable(array($namespaceClass, $this->method));
         } catch (\Exception $ex) {
             throw new \Exception('Not found', 404);
         }
-
+        v($this->namespace);
+        v($this->method);
         if ($isCallable) {
             $bindingModel = null;
-            if($this->router->getPost()) {
-                $bindingModel = BindingModel::validate($this->router->getPost(),
-                    $this->config->bindingModels[$this->namespace][$controllerPrefix][$this->method]);
-            }
+//            if($this->router->getPost()) {
+//                $bindingModel = BindingModel::validate($this->router->getPost(),
+//                    $this->config->bindingModels[$this->namespace][$controllerPrefix][$this->method]);
+//            }
 
             $newController = new $namespaceClass();
+
             call_user_func(array($newController, $this->method), $bindingModel);
         } else {
             throw new \Exception('Not found', 404);

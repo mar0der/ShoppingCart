@@ -13,7 +13,7 @@ namespace My\ShoppingCart\Controllers{
     {
         public function index()
         {
-            echo "index";
+            echo "Index";
         }
 
         public function login()
@@ -23,7 +23,31 @@ namespace My\ShoppingCart\Controllers{
 
         public function register()
         {
-            echo "register";
+            if($this->session->userId != null) {
+                $this->redirect('/profile');
+            }
+
+            $userViewModel = new RegisterUser();
+            if ($this->input->post('submit')) {
+                $username = $this->input->post('username', 'trim');
+                $email = $this->input->post('email', 'trim');
+                $pass = $this->input->post('pass', 'trim');
+                $passAgain = $this->input->post('passAgain', 'trim');
+
+                $userModel = new UserModel();
+                $userViewModel->errors = $userModel->register($username, $email, $pass, $passAgain);
+
+                if (!count($userViewModel->errors)) {
+                    $userViewModel->success = true;
+                }
+            }
+
+            $view = View::getInstance();
+            View::title('Register');
+            $view->appendToLayout('header', 'header');
+            $view->appendToLayout('body', 'user.register');
+            $view->appendToLayout('footer', 'footer');
+            $view->display('layouts.default', $userViewModel);
         }
 
     }

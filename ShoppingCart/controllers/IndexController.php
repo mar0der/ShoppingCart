@@ -13,7 +13,14 @@ namespace My\ShoppingCart\Controllers {
     {
         public function index()
         {
-            echo "index tuka sam";
+            $viewModel =  new \My\ShoppingCart\Models\ViewModels\Index\Index();
+            $viewModel->setBody('Body') ;
+
+            $view = \My\Mvc\Core\View::getInstance();
+            $view->appendToLayout('header', 'header');
+            $view->appendToLayout('body', 'Index');
+            $view->appendToLayout('footer', 'footer');
+            $view->display('layouts.default', $viewModel);
         }
 
     }

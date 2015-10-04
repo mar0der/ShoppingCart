@@ -1,18 +1,20 @@
 <?php
-$config['default_controller']='Index';
-$config['default_method']='Index';
-$config['controllersSuffix']='Controller';
-$config['namespaces']['My\ShoppingCart']='C:\xampp\htdocs\exs\mf\ShoppingCart';
-$config['defaultControllerNamespace'] = 'My\ShoppingCart\Controllers';
+$config['default_controller'] = 'Home';
+$config['default_method'] = 'Index';
+$config['namespaces']['DH\ShoppingCart'] = 'C:\Users\peter\Dropbox\1.SoftUni\Petar\Level 3\WDB\Exs\trunk\shoppingCart';
+$config['defaultControllerNamespace'] = 'DH\ShoppingCart\Controllers';
 
 $config['session']['autostart'] = true;
-$config['session']['type'] = 'database';
-$config['session']['name'] = '__sess';
+$config['session']['type'] = 'native';
+$config['session']['name'] = '_sess';
 $config['session']['lifetime'] = 3600;
 $config['session']['path'] = '/';
 $config['session']['domain'] = '';
 $config['session']['secure'] = false;
 $config['session']['dbConnection'] = 'default';
 $config['session']['dbTable'] = 'sessions';
-return $config;
 
+$config['displayExceptions'] = true;
+//$config['namespaces']['DH\ShoppingCart'] = '../../shoppingCart';
+
+return $config;

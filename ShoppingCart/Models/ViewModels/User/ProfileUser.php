@@ -1,10 +1,12 @@
 <?php
 
-namespace My\ShoppingCart\Models\ViewModels\User {
+namespace DH\ShoppingCart\Models\ViewModels\User;
 
 
-    class ProfileUser
-    {
-        public $username;
-    }
+class ProfileUser
+{
+    public $username;
+    public $money;
+    public $email;
+    public $role;
 }

@@ -1,6 +1,6 @@
 <?php
 
-$route['admin'] = ['My\ShoppingCart\Controllers\Admin'];
+$route['admin'] = ['DH\ShoppingCart\Controllers\Admin'];
 
 include 'customRoutes.php';
 

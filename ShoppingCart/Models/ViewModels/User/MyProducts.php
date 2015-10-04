@@ -2,7 +2,8 @@
 
 namespace DH\ShoppingCart\Models\ViewModels\User;
 
-class LoginUser
+
+class MyProducts
 {
-    public $errors = array();
+    public $products;
 }

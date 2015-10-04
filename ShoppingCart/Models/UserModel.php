@@ -62,13 +62,19 @@ class UserModel extends SimpleDB
             return $errors;
     }
 
-    public function login($username, $password)
+    public function login($username, $password, $userIp)
     {
-        $user = $this->prepare('SELECT * FROM users WHERE username = ?')
+        $user = $this->prepare('SELECT * FROM `users` u LEFT JOIN users_bans ub ON u.id = ub.user_id WHERE u.username = ?')
                     ->execute(array($username))
                     ->fetchRowAssoc();
 
+        if($user['user_id'] != null || $user['ip'] != null){
+            return "banned";
+        }
+
         if($user && password_verify($password, $user['password'])) {
+            $addIpResult = $this->prepare('UPDATE users SET ip = ? WHERE id = ?');
+            $addIpResult->execute([$userIp, $user['id']]);
             unset($user['password']);
             return $user;
         }
@@ -78,8 +84,29 @@ class UserModel extends SimpleDB
 
     public function getUserInfo($id)
     {
-        return $this->prepare('SELECT u.id, u.username, u.email, u.money, r.name as role FROM users u INNER JOIN roles r ON u.role = r.id WHERE u.id = ?')
+        return $this->prepare('SELECT u.id, u.username, u.email, u.money, u.ip, u.last_login_date as lastLoginDate, u.registration_date as registrationDate, r.name as role FROM users u INNER JOIN roles r ON u.role = r.id WHERE u.id = ?')
             ->execute(array($id))
             ->fetchRowAssoc();
+    }
+
+    public function banUser($id, $myId)
+    {
+        $existingUser = $this->getUserInfo($id);
+        if(!$existingUser){
+            throw new \Exception('No such user');
+        }
+
+        if($existingUser['id'] == $myId){
+            throw new \Exception('You can`t ban yourself');
+        }
+
+        $result = $this->prepare("INSERT INTO users_bans SET user_id = ?, ip= ? ON DUPLICATE KEY UPDATE user_id = ?, ip = ?");
+        $result->execute(
+            [
+                $existingUser["id"],
+                $existingUser["ip"],
+                $existingUser["id"],
+                $existingUser["ip"]
+            ]);
     }
 }

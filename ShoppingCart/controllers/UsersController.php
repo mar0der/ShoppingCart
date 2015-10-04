@@ -53,14 +53,22 @@ class UsersController extends BaseController
             $this->redirect('/profile');
         }
 
+
+
         $viewModel = new \DH\ShoppingCart\Models\ViewModels\User\LoginUser();
         if ($model) {
             if ($model->modelState) {
                 $username = $model->username;
                 $password = $model->password;
+                $userIp = $_SERVER['REMOTE_ADDR'];
 
                 $userModel = new UserModel();
-                $result = $userModel->login($username, $password);
+                $result = $userModel->login($username, $password, $userIp);
+
+                if($result == 'banned'){
+                    $this->redirect('/login');
+                    die;
+                }
 
                 if (!$result) {
                     $viewModel->errors[] = 'Invalid password.';
@@ -92,14 +100,22 @@ class UsersController extends BaseController
             $this->redirect('/login');
         }
 
+        $myId = $this->session->userId;
+        $userId = $this->input->get(0, "int");
+        if(isset($userId) && $userId != 0 &&  $userId != $myId && $this->isAdmin()){
+            $userProfileId = $userId;
+        }else{
+            $userProfileId = $myId;
+        }
 
         $userModel = new UserModel();
-        $userInfo = $userModel->getUserInfo($this->session->userId);
+        $userInfo = $userModel->getUserInfo($userProfileId);
         $viewModel = new ProfileUser();
         $viewModel->username = $userInfo['username'];
         $viewModel->money = $userInfo['money'];
         $viewModel->email = $userInfo['email'];
         $viewModel->role = $userInfo['role'];
+        $viewModel->id = $userInfo['id'];
 
         $view = View::getInstance();
         View::title('Profile');
